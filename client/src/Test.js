@@ -15,7 +15,7 @@ function Data() {
     return (
         <div>
             <h2>Data from Flask:</h2>
-            {data ? <p>{data.message}</p> : <p>Loading...</p>}
+            {data ? <p>{data.message} </p> : <p>Loading...</p>}
         </div>
     );
 }
