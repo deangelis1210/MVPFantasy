@@ -12,7 +12,9 @@ cd server
 Create and activate python virtual environment:
 
 python -m venv env
+
 source venv/bin/activate
+
 
 Ensure that you are in your virtual environment - your terminal should start with (env)
 
