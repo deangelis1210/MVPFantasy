@@ -11,11 +11,8 @@ function App() {
     <>
       <Router>
         <Routes>
-          <Route path='/' exact Component={HomePage} />
           <Route path='/login' exact Component={LoginPage} />
-          {/* <Route path='/about' exact Component={About} />
-          <Route path='/contact' exact Component={Contact} />
-          <Route path='/privacy-policy' exact Component={Privacy} /> */}
+          <Route path='/' exact Component={HomePage} />
         </Routes>
       </Router>
     </>
