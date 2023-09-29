@@ -17,9 +17,16 @@ Python, Node.js, NPM
 * Clone the github repository
 * cd server
 * Set up python virtual environment
+* Mac:
 ```
 python -m venv env
 source env/bin/activate
+```
+* Windows:
+```
+env/Scripts/activate.bat
+env/Scripts/Activate.ps1
+python app.py
 ```
 * Ensure that you are in your virtual env. Your terminal should start with (env)
 * Install flask:
