@@ -6,7 +6,7 @@ import Data from './Test';
 function App() {
   return (
     <div>
-      <h1>THIS IS A TEST</h1>
+      <h1>MVP Fantasy</h1>
       <Data /> 
     </div>
   );
