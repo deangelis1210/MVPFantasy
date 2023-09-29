@@ -27,7 +27,6 @@ Windows:
 ```
 env/Scripts/activate.bat
 env/Scripts/Activate.ps1
-python app.py
 ```
 * Ensure that you are in your virtual env. Your terminal should start with (env)
 * Install flask:

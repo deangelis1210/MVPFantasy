@@ -7,7 +7,6 @@ function Home() {
     <div className="home-container">
       <h1 className="home-title">MVP Fantasy</h1>
       <Link to="/login" className="home-link">Login</Link>
-      {/* TODO */}
     </div>
   );
 }
