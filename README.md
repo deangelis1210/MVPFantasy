@@ -17,6 +17,7 @@ Python, Node.js, NPM
 * Clone the github repository
 * cd server
 * Set up python virtual environment
+
 Mac:
 ```
 python -m venv env
