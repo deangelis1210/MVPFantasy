@@ -1,16 +1,13 @@
-import logo from './logo.svg';
-import './App.css';
-import Data from './Test'; 
-
+import React from 'react';
+import PlayerSearch from './PlayerSearch';
 
 function App() {
   return (
-    <div>
-      <h1>THIS IS A TEST</h1>
-      <Data /> 
+    <div className="App">
+      <h1>MVP Fantasy - Player Search</h1>
+      <PlayerSearch />
     </div>
   );
 }
 
 export default App;
-
