@@ -17,12 +17,12 @@ Python, Node.js, NPM
 * Clone the github repository
 * cd server
 * Set up python virtual environment
-* Mac:
+Mac:
 ```
 python -m venv env
 source env/bin/activate
 ```
-* Windows:
+Windows:
 ```
 env/Scripts/activate.bat
 env/Scripts/Activate.ps1
