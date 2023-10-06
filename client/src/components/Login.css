@@ -9,8 +9,8 @@
   
 .log-in-form {
     background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
+    padding: 30px;
+    border-radius: 20px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     text-align: center;
 }
@@ -24,7 +24,7 @@
 .text-input {
     width: 100%;
     max-width: 600px;
-    width: 100%;
+    width: 90%;
     padding: 10px;
     margin-bottom: 10px;
     border: 1px solid #ccc;
