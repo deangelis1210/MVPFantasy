@@ -1,8 +1,7 @@
-import logo from './logo.svg';
 import HomePage from './components/pages/HomePage';
 import LoginPage from './components/pages/LoginPage';
 import './App.css';
-import Data from './Test'; 
+import SignUpPage from './components/pages/SignUpPage';
 import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 
 
@@ -11,8 +10,9 @@ function App() {
     <>
       <Router>
         <Routes>
-          <Route path='/login' exact Component={LoginPage} />
-          <Route path='/' exact Component={HomePage} />
+          <Route path='/' exact Component={LoginPage} />
+          <Route path='/home' exact Component={HomePage} />
+          <Route path='/signup' exact Component={SignUpPage} />
         </Routes>
       </Router>
     </>
