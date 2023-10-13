@@ -35,10 +35,10 @@ function Login() {
             <input name="password" type='password' placeholder="Enter your password" 
             className='text-input'></input>
             <button className='log-in-button' type="submit">Sign In</button>
+            <br/><br/>
             {errorMessage && <div className="error-message">{errorMessage}</div>}
             <div className='signup-prompt-container'>Don't have an account? <Link to = '/signup'>Sign Up</Link></div>
             <br/>
-            <Link to = '/home'>Home</Link>
         </form>
     </div>
   )
