@@ -12,18 +12,18 @@ function Home() {
   const handleClick = () => {
     signOut(database).then(val => {
       console.log(val);
-      history('/login')
+      history('/');
     });
   }
 
   return (
-    <div className="home-container">
-      <img src='/images/logo.jpg' alt='logo'/>
-      <br/>
-      <Link to="/" className="home-link">Login</Link>
-      <br/>
-      <button onClick={handleClick}>Log Out</button>
-      <PlayerSearch />
+    <div className='home-big-container'>
+        <button onClick={handleClick} className='log-in-button'>Sign Out</button>
+      <div className="home-container">
+        <img src='/images/logo.jpg' alt='logo' className='home-logo'/>
+        <br/><br/>
+        <PlayerSearch />
+      </div>
     </div>
   );
 }
