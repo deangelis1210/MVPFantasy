@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { database } from '../firebase.js'
 import { signOut } from 'firebase/auth';
 import './Home.css';
+import { useDarkMode } from '../DarkModeContext.js';
 
 function Home() {
 
@@ -16,9 +17,15 @@ function Home() {
     });
   }
 
+  const { isDarkMode, toggleDarkMode } = useDarkMode();
+  const handleDarkModeToggle = () => {
+    toggleDarkMode();
+  };
+
   return (
-    <div className='home-big-container'>
+    <div className={isDarkMode ? 'dark-mode home-big-container' : 'home-big-container'}>
         <button onClick={handleClick} className='log-in-button'>Sign Out</button>
+        <button onClick={handleDarkModeToggle} className='log-in-button'>Toggle Dark Mode</button>
       <div className="home-container">
         <img src='/images/logo.jpg' alt='logo' className='home-logo'/>
         <br/><br/>
