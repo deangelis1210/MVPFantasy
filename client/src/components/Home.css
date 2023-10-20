@@ -4,11 +4,26 @@
     min-height: 100vh;
 }
 
+.dark-mode {
+    background-color: #333;
+    color: #fff;
+}
+
 .home-container {
     text-align: center;
     padding: 40px;
     background-color: #f5f5f5;
     min-height: 100vh;
+}
+
+.dark-mode .home-container {
+    background-color: #333;
+    color: #fff;
+}
+  
+.dark-mode .log-in-button {
+    background-color: #fff;
+    color: #333;
 }
   
 .home-title {
