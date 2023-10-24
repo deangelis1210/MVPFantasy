@@ -47,16 +47,16 @@ function PlayerSearch() {
 
     const handleSearch = (event) => {
         const searchTermLowerCase = event.target.value.toLowerCase();
-    
+        
         // Update the selected position to "All Players"
         setSelectedPosition('All Players');
-    
-        // Perform the search with the updated selected position
+        
+        // Perform the case-insensitive search with the updated selected position
         if (searchTermLowerCase.trim() === '') {
             // If the search term is empty, show all players
             setFilteredPlayers(playerNames);
         } else {
-            // Otherwise, filter based on the search term
+            // Otherwise, filter based on the search term (case-insensitive)
             const filtered = playerNames.filter(name => name.toLowerCase().includes(searchTermLowerCase));
             setFilteredPlayers(filtered);
         }
@@ -65,10 +65,9 @@ function PlayerSearch() {
     
     
     
+    
     const handleClearSearch = () => {
-        setSearchTerm('');
-        setSelectedPosition('All Players'); // Update the selected position to "All Players"
-        setFilteredPlayers(playerNames);
+     
     };
 
     return (
