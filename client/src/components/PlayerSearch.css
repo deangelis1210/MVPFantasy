@@ -1,3 +1,26 @@
 ul {
     list-style: none;
 }
+
+.playerSearchContainer {
+    display: flex;
+    justify-content: center;
+    
+}
+
+.playerStatsContainer {
+    width: 250px;  
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    padding: 10px;  
+    margin-right: 20px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    font-size: 0.9rem;  /* Reduce the font size slightly */
+}
+
+.playerStatsContainer h3 {
+    border-bottom: 1px solid #e0e0e0;
+    padding-bottom: 5px;  /* Reduce the padding */
+    margin-bottom: 5px;  /* Reduce the margin */
+}
+

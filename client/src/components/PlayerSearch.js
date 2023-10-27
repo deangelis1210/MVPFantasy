@@ -9,6 +9,7 @@ function PlayerSearch() {
     const [searchTerm, setSearchTerm] = useState('');
     const [filteredPlayers, setFilteredPlayers] = useState([]);
     const [selectedPlayers, setSelectedPlayers] = useState([]);
+    const [selectedPlayerStats, setSelectedPlayerStats] = useState(null);
 
 
     useEffect(() => {
@@ -26,6 +27,20 @@ function PlayerSearch() {
 
         fetchPlayerNames();
     }, []);
+
+    const fetchPlayerStats = async (playerName) => {
+        try {
+            const response = await axios.get('/api/get_player_stats', {
+                params: {
+                    name: playerName,
+                },
+            });
+            setSelectedPlayerStats(response.data.stats);
+            console.log(selectedPlayerStats.Rushing_Yds)
+        } catch (error) {
+            console.error('Error fetching player stats:', error);
+        }
+    };
 
     const handlePositionChange = async (position) => {
         setLoading(true);
@@ -88,44 +103,77 @@ function PlayerSearch() {
     };
     
     return (
-        <div>
-            <h2>Player Names</h2>
-            <label>
-                Filter by Position:
-                <select value={selectedPosition} onChange={(e) => handlePositionChange(e.target.value)}>
-                    <option value="All Players">All Players</option>
-                    <option value="QB">QB</option>
-                    <option value="RB">RB</option>
-                    <option value="WR">WR</option>
-                    <option value="TE">TE</option>
-                </select>
-            </label>
+        <div className="playerSearchContainer">
 
-            <div>
-            <label>
-                Search:
-                <input type="text" value={searchTerm} onChange={handleSearch} />
-            </label>
-                <button onClick={handleClearSearch}>Clear Search</button>
+            {/* Display selectedPlayerStats on the left side */}
+            <div className="playerStatsContainer">
+                <h3>Player Stats</h3>
+                {selectedPlayerStats ? (
+                <div>
+                    <p>Player Name: {selectedPlayerStats.Player}</p>
+                    <p>Team: {selectedPlayerStats.Team}</p>
+                    <p>Position: {selectedPlayerStats.Position}</p>
+                    <p>Games Played: {selectedPlayerStats.Games_Played}</p>
+                    <p>Passing Yards: {selectedPlayerStats.Passing_Yds}</p>
+                    <p>Passing Touchdowns: {selectedPlayerStats.Passing_TD}</p>
+                    <p>Passing Interceptions: {selectedPlayerStats.Passing_Int}</p>
+                    <p>Rushing Yards: {selectedPlayerStats.Rushing_Yds}</p>
+                    <p>Rushing Touchdowns: {selectedPlayerStats.Rushing_TD}</p>
+                    <p>Receiving Receptions: {selectedPlayerStats.Receiving_Rec}</p>
+                    <p>Value Based Drafting (VBD): {selectedPlayerStats.VBD}</p>
+                    <p>Position Rank: {selectedPlayerStats.PosRank}</p>
+                    <p>Fantasy Points: {selectedPlayerStats.FantPt}</p>
+                    <p>Points Per Reception (PPR): {selectedPlayerStats.PPR}</p>
+                </div>
+            ) : (
+                    <p>Click on player name to view stats.</p>
+                )}
             </div>
 
-            {loading ? (
-                <p>Loading...</p>
-            ) : (
-                <ul>
-                {filteredPlayers.map((name, index) => (
-                    <li key={index}>
-                        <button onClick={() => togglePlayerSelection(name)}>
-                            {selectedPlayers.includes(name) ? "-" : "+"}
-                        </button>
-                    {name}
-        </li>
-    ))}
-</ul>
+            {/* The rest of your UI on the right side */}
+            <div className="playerNamesContainer">
+                <h2>Player Names</h2>
+                <label>
+                    Filter by Position:
+                    <select value={selectedPosition} onChange={(e) => handlePositionChange(e.target.value)}>
+                        <option value="All Players">All Players</option>
+                        <option value="QB">QB</option>
+                        <option value="RB">RB</option>
+                        <option value="WR">WR</option>
+                        <option value="TE">TE</option>
+                    </select>
+                </label>
 
-            )}
+                <div>
+                    <label>
+                        Search:
+                        <input type="text" value={searchTerm} onChange={handleSearch} />
+                    </label>
+                    <button onClick={handleClearSearch}>Clear Search</button>
+                </div>
+
+                {loading ? (
+                    <p>Loading...</p>
+                ) : (
+                    <ul>
+                        {filteredPlayers.map((name, index) => (
+                            <li key={index}>
+                                <button onClick={() => togglePlayerSelection(name)}>
+                                    {selectedPlayers.includes(name) ? "-" : "+"}
+                                </button>
+                                <span onClick={() => fetchPlayerStats(name)}>
+                                    {name}
+                                </span>
+                            </li>
+                        ))}
+                    </ul>
+                )}
+            </div>
         </div>
     );
 }
 
 export default PlayerSearch;
+
+
+
