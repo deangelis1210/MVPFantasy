@@ -26,6 +26,7 @@ function Home() {
     <div className={isDarkMode ? 'dark-mode home-big-container' : 'home-big-container'}>
         <button onClick={handleClick} className='log-in-button'>Sign Out</button>
         <button onClick={handleDarkModeToggle} className='log-in-button'>Toggle Dark Mode</button>
+        <Link to = '/team'><button className='log-in-button'>Team Page</button></Link>
       <div className="home-container">
         <img src='/images/logo.jpg' alt='logo' className='home-logo'/>
         <br/><br/>
