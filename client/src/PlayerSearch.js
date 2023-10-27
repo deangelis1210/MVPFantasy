@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import "./PlayerSearch.css"
-import { collection, addDoc, getDocs, setDoc, doc, deleteDoc } from "firebase/firestore";
-import { db } from "../firebase";
 
 function PlayerSearch() {
     const [playerNames, setPlayerNames] = useState([]);
@@ -89,26 +87,11 @@ function PlayerSearch() {
     };
     
     
-    const togglePlayerSelection = async (playerName) => {
+    const togglePlayerSelection = (playerName) => {
         if (selectedPlayers.includes(playerName)) {
             setSelectedPlayers(prevPlayers => prevPlayers.filter(p => p !== playerName));
-            try {
-                await deleteDoc(doc(db, "team-players", playerName));
-                alert('Player Deleted ✔');
-              } catch (error) {
-                console.error('Error deleting player from Firestore:', error);
-              }
         } else {
             setSelectedPlayers(prevPlayers => [...prevPlayers, playerName]);
-            try {
-                const passDoc = doc(db, "team-players", playerName);
-                await setDoc(passDoc, {
-                    player: playerName, 
-                });
-                alert('Player Added ✔');
-            } catch (e) {
-                console.error("Error adding document: ", e);
-            }
         }
     };
     
@@ -121,6 +104,8 @@ function PlayerSearch() {
     
     return (
         <div className="playerSearchContainer">
+
+            {/* Display selectedPlayerStats on the left side */}
             <div className="playerStatsContainer">
                 <h3>Player Stats</h3>
                 {selectedPlayerStats ? (
@@ -145,6 +130,7 @@ function PlayerSearch() {
                 )}
             </div>
 
+            {/* The rest of your UI on the right side */}
             <div className="playerNamesContainer">
                 <h2>Player Names</h2>
                 <label>
@@ -171,8 +157,8 @@ function PlayerSearch() {
                 ) : (
                     <ul>
                         {filteredPlayers.map((name, index) => (
-                            <li key={index} className="playerNameBox">
-                                <button className="toggleButton" onClick={() => togglePlayerSelection(name)}>
+                            <li key={index}>
+                                <button onClick={() => togglePlayerSelection(name)}>
                                     {selectedPlayers.includes(name) ? "-" : "+"}
                                 </button>
                                 <span onClick={() => fetchPlayerStats(name)}>

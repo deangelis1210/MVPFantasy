@@ -20,10 +20,12 @@ function App() {
           element={user ? <HomePage /> : <Navigate to="/" />}
         />
         <Route path="/signup" element={<SignUpPage />} />
+
         <Route
           path="/team"
           element={user ? <TeamPage /> : <Navigate to="/" />}
         />
+
       </Routes>
     </Router>
   );
