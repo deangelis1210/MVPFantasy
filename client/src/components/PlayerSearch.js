@@ -3,23 +3,43 @@ import axios from 'axios';
 import "./PlayerSearch.css"
 
 function PlayerSearch() {
-    const [position, setPosition] = useState('QB');
-    const [season, setSeason] = useState(2023);
-    const [players, setPlayers] = useState([]);
-    const [loading, setLoading] = useState(false);
+    const [playerNames, setPlayerNames] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [selectedPosition, setSelectedPosition] = useState('All Players');
+    const [searchTerm, setSearchTerm] = useState('');
+    const [filteredPlayers, setFilteredPlayers] = useState([]);
+    const [selectedPlayers, setSelectedPlayers] = useState([]);
 
-    const handleSearch = async () => {
+
+    useEffect(() => {
+        const fetchPlayerNames = async () => {
+            try {
+                const response = await axios.get('/api/player-names');
+                setPlayerNames(response.data.player_names);
+                setFilteredPlayers(response.data.player_names);
+            } catch (error) {
+                console.error('Error fetching player names:', error);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchPlayerNames();
+    }, []);
+
+    const handlePositionChange = async (position) => {
         setLoading(true);
 
         try {
             const response = await axios.get(`/api/get_players_by_position`, {
                 params: {
                     position,
-                    season,
                 },
             });
 
-            setPlayers(response.data.players);
+            setPlayerNames(response.data.players);
+            setSelectedPosition(position);
+            setFilteredPlayers(response.data.players);
         } catch (error) {
             console.error('Error:', error);
         } finally {
@@ -27,39 +47,83 @@ function PlayerSearch() {
         }
     };
 
-    useEffect(() => {
-        // Trigger the search when the component mounts or when position or season changes
-        handleSearch();
-    }, [position, season]);
-
+    const handleSearch = async (event) => {
+        const searchTerm = event.target.value;
+    
+        setSearchTerm(searchTerm);
+    
+        if (searchTerm.trim() === '') {
+            setFilteredPlayers(playerNames);
+        } else {
+            setLoading(true);
+            try {
+                const response = await axios.get(`/api/search_player`, {
+                    params: {
+                        name: searchTerm,
+                    },
+                });
+                setFilteredPlayers(response.data.players);
+            } catch (error) {
+                console.error('Error:', error);
+            } finally {
+                setLoading(false);
+            }
+        }
+    };
+    
+    
+    const togglePlayerSelection = (playerName) => {
+        if (selectedPlayers.includes(playerName)) {
+            setSelectedPlayers(prevPlayers => prevPlayers.filter(p => p !== playerName));
+        } else {
+            setSelectedPlayers(prevPlayers => [...prevPlayers, playerName]);
+        }
+    };
+    
+    
+    
+    const handleClearSearch = () => {
+        setSearchTerm('');
+        setFilteredPlayers(playerNames);
+    };
+    
     return (
         <div>
+            <h2>Player Names</h2>
             <label>
-                Position:
-                <select value={position} onChange={(e) => setPosition(e.target.value)}>
+                Filter by Position:
+                <select value={selectedPosition} onChange={(e) => handlePositionChange(e.target.value)}>
+                    <option value="All Players">All Players</option>
                     <option value="QB">QB</option>
                     <option value="RB">RB</option>
-                    <option value="WR/TE">WR/TE</option>
-                </select>
-            </label>
-
-            <label>
-                Season:
-                <select value={season} onChange={(e) => setSeason(e.target.value)}>
-                    <option value={2023}>2023</option>
-
-                    {/* Add more options as needed */}
+                    <option value="WR">WR</option>
+                    <option value="TE">TE</option>
                 </select>
             </label>
 
             <div>
-                <h3>All Players for {position} in {season}</h3>
-                <ul>
-                    {players.map((player, index) => (
-                        <li key={index}>{player}</li>
-                    ))}
-                </ul>
+            <label>
+                Search:
+                <input type="text" value={searchTerm} onChange={handleSearch} />
+            </label>
+                <button onClick={handleClearSearch}>Clear Search</button>
             </div>
+
+            {loading ? (
+                <p>Loading...</p>
+            ) : (
+                <ul>
+                {filteredPlayers.map((name, index) => (
+                    <li key={index}>
+                        <button onClick={() => togglePlayerSelection(name)}>
+                            {selectedPlayers.includes(name) ? "-" : "+"}
+                        </button>
+                    {name}
+        </li>
+    ))}
+</ul>
+
+            )}
         </div>
     );
 }
