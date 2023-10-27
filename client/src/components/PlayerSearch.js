@@ -155,18 +155,19 @@ function PlayerSearch() {
                 {loading ? (
                     <p>Loading...</p>
                 ) : (
-                    <ul>
-                        {filteredPlayers.map((name, index) => (
-                            <li key={index}>
-                                <button onClick={() => togglePlayerSelection(name)}>
-                                    {selectedPlayers.includes(name) ? "-" : "+"}
-                                </button>
-                                <span onClick={() => fetchPlayerStats(name)}>
-                                    {name}
-                                </span>
-                            </li>
-                        ))}
-                    </ul>
+                <ul>
+                    {filteredPlayers.map((name, index) => (
+                        <li key={index} className="playerNameBox">
+                            <button className="toggleButton" onClick={() => togglePlayerSelection(name)}>
+                                {selectedPlayers.includes(name) ? "-" : "+"}
+                            </button>
+                            <span onClick={() => fetchPlayerStats(name)}>
+                                {name}
+                            </span>
+                        </li>
+                    ))}
+                </ul>
+
                 )}
             </div>
         </div>

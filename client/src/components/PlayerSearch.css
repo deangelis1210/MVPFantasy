@@ -24,3 +24,24 @@ ul {
     margin-bottom: 5px;  /* Reduce the margin */
 }
 
+/* PlayerSearch.css */
+
+.playerNameBox {
+    display: flex;
+    align-items: center; /* Vertically aligns the contents */
+    border: 1px solid #ccc; /* Adds a border around each name */
+    margin-bottom: 5px; /* Some space between each name box */
+    padding: 5px; /* Some padding for aesthetic purposes */
+}
+
+.playerNameBox span {
+    flex-grow: 1; /* This makes the name span take the remaining width */
+    margin-left: 10px; /* Some space between the button and the name */
+}
+
+.toggleButton {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 5px 10px; /* Add some padding to make the button larger */
+}
