@@ -11,9 +11,6 @@ function SignUp() {
     const history = useNavigate();
 
     const { isDarkMode, toggleDarkMode } = useDarkMode();
-    const handleDarkModeToggle = () => {
-        toggleDarkMode();
-    };
   
     const handleSubmit = (e) => {
         e.preventDefault();

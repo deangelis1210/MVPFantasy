@@ -46,4 +46,77 @@
 .home-logo {
     border-radius: 20px;
 }
-  
+
+/* All sun/moon styling from https://learnersbucket.com/tutorials/js-projects/day-night-toggle-switch-in-javascript/ */
+* {
+    box-sizing: border-box;
+}
+
+.sun-moon {
+    position: absolute;
+    width: 50px;
+    height: 28px;
+    left: 1450px;
+    top: 20px;
+    padding: 2.5px;
+    border-radius: 22.5px;
+    border: 1.5px solid #fff;
+    background-color: #333;
+    overflow: hidden;
+    transition: all 1s cubic-bezier(0.6, -0.28, 0.735, 0.045);     
+}
+
+.circle {
+    border-radius: 50%;
+    display: inline-block;
+    position: absolute;
+}
+
+.small {
+    width: 15px;
+    height: 15px;
+    background: #333;
+    left: 15px;
+    top: 1.5px;
+    transition: all 1s cubic-bezier(0.6, -0.28, 0.735, 0.045);
+}
+
+.large {
+    width: 20px;
+    height: 20px;
+    background: #fff;
+    border: 1.5px solid #fff;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 7px;
+    transition: all 1s cubic-bezier(0.6, -0.28, 0.735, 0.045);
+}
+
+.sun-moon input {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    margin: 0;
+    opacity: 0;
+    z-index: 1;
+    cursor: pointer;
+}
+
+.move {
+    background-color: #fff;
+    border-color: #007bff;
+}
+
+.move .large {
+    left: 25px;
+    background: yellow;
+    border-color: orange;
+}
+
+.move .small {
+    left: 30px;
+    top: 25px;
+    background-color: #fff;
+}
