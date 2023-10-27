@@ -8,6 +8,8 @@ function PlayerSearch() {
     const [selectedPosition, setSelectedPosition] = useState('All Players');
     const [searchTerm, setSearchTerm] = useState('');
     const [filteredPlayers, setFilteredPlayers] = useState([]);
+    const [selectedPlayers, setSelectedPlayers] = useState([]);
+
 
     useEffect(() => {
         const fetchPlayerNames = async () => {
@@ -45,31 +47,46 @@ function PlayerSearch() {
         }
     };
 
-    const handleSearch = (event) => {
-        const searchTermLowerCase = event.target.value.toLowerCase();
-        
-        // Update the selected position to "All Players"
-        setSelectedPosition('All Players');
-        
-        // Perform the case-insensitive search with the updated selected position
-        if (searchTermLowerCase.trim() === '') {
-            // If the search term is empty, show all players
+    const handleSearch = async (event) => {
+        const searchTerm = event.target.value;
+    
+        setSearchTerm(searchTerm);
+    
+        if (searchTerm.trim() === '') {
             setFilteredPlayers(playerNames);
         } else {
-            // Otherwise, filter based on the search term (case-insensitive)
-            const filtered = playerNames.filter(name => name.toLowerCase().includes(searchTermLowerCase));
-            setFilteredPlayers(filtered);
+            setLoading(true);
+            try {
+                const response = await axios.get(`/api/search_player`, {
+                    params: {
+                        name: searchTerm,
+                    },
+                });
+                setFilteredPlayers(response.data.players);
+            } catch (error) {
+                console.error('Error:', error);
+            } finally {
+                setLoading(false);
+            }
+        }
+    };
+    
+    
+    const togglePlayerSelection = (playerName) => {
+        if (selectedPlayers.includes(playerName)) {
+            setSelectedPlayers(prevPlayers => prevPlayers.filter(p => p !== playerName));
+        } else {
+            setSelectedPlayers(prevPlayers => [...prevPlayers, playerName]);
         }
     };
     
     
     
-    
-    
     const handleClearSearch = () => {
-     
+        setSearchTerm('');
+        setFilteredPlayers(playerNames);
     };
-
+    
     return (
         <div>
             <h2>Player Names</h2>
@@ -96,10 +113,16 @@ function PlayerSearch() {
                 <p>Loading...</p>
             ) : (
                 <ul>
-                    {filteredPlayers.map((name, index) => (
-                        <li key={index}>{name}</li>
-                    ))}
-                </ul>
+                {filteredPlayers.map((name, index) => (
+                    <li key={index}>
+                        <button onClick={() => togglePlayerSelection(name)}>
+                            {selectedPlayers.includes(name) ? "-" : "+"}
+                        </button>
+                    {name}
+        </li>
+    ))}
+</ul>
+
             )}
         </div>
     );

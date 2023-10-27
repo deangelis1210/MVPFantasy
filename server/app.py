@@ -16,9 +16,6 @@ if response.status_code == 200:
     df = pd.read_html(StringIO(html_content), header=[0, 1])[0]
 
 
-rb_players = df[df[('Unnamed: 3_level_0', 'FantPos')] == 'RB']
-#print(rb_players)
-
 def get_players_by_position_filter(position):
     filtered_players = df[df[('Unnamed: 3_level_0', 'FantPos')] == position]
     return filtered_players[('Unnamed: 1_level_0', 'Player')].tolist()
@@ -41,6 +38,13 @@ def get_player_names():
 def api_player_names():
     player_names = get_player_names()
     return jsonify({'player_names': player_names})
+
+@app.route('/api/search_player', methods=['GET'])
+def search_player():
+    name_query = request.args.get('name', '').lower()
+    matching_players = df[df[('Unnamed: 1_level_0', 'Player')].str.lower().str.contains(name_query)]
+    players = matching_players[('Unnamed: 1_level_0', 'Player')].tolist()
+    return jsonify({'players': players})
 
 if __name__ == '__main__':
     app.run(debug=True)
