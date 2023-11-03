@@ -7,6 +7,7 @@ import './Team.css';
 import { useLightMode } from '../LightModeContext.js';
 import { collection, addDoc, getDocs, setDoc, doc, deleteDoc } from "firebase/firestore";
 import { db } from "../firebase";
+import { getAuth } from "firebase/auth";
 
 function Team() {
     const history = useNavigate();
@@ -21,7 +22,10 @@ function Team() {
     const [players, setPlayers] = useState([]);
 
     const fetchPlayers = async () => { 
-        await getDocs(collection(db, "team-players"))
+        const auth = getAuth();
+        const user = auth.currentUser;
+        const email = user.email;
+        await getDocs(collection(db, email))
         .then((querySnapshot)=>{               
             const items = [];  
             querySnapshot.forEach((doc) => {
