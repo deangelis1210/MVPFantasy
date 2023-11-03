@@ -3,6 +3,7 @@ import axios from 'axios';
 import "./PlayerSearch.css"
 import { collection, addDoc, getDocs, setDoc, doc, deleteDoc } from "firebase/firestore";
 import { db } from "../firebase";
+import { getAuth } from "firebase/auth";
 
 function PlayerSearch() {
     const [playerNames, setPlayerNames] = useState([]);
@@ -93,7 +94,10 @@ function PlayerSearch() {
         if (selectedPlayers.includes(playerName)) {
             setSelectedPlayers(prevPlayers => prevPlayers.filter(p => p !== playerName));
             try {
-                await deleteDoc(doc(db, "team-players", playerName));
+                const auth = getAuth();
+                const user = auth.currentUser;
+                const email = user.email;
+                await deleteDoc(doc(db, email, playerName));
                 alert('Player Deleted ✔');
               } catch (error) {
                 console.error('Error deleting player from Firestore:', error);
@@ -101,7 +105,10 @@ function PlayerSearch() {
         } else {
             setSelectedPlayers(prevPlayers => [...prevPlayers, playerName]);
             try {
-                const passDoc = doc(db, "team-players", playerName);
+                const auth = getAuth();
+                const user = auth.currentUser;
+                const email = user.email;
+                const passDoc = doc(db, email, playerName);
                 await setDoc(passDoc, {
                     player: playerName, 
                 });
