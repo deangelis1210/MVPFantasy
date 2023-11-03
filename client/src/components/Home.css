@@ -106,8 +106,8 @@
 }
 
 .move {
-    background-color: #fff;
-    border-color: #007bff;
+    background-color: #007bff;
+    border-color: #333;
 }
 
 .move .large {
@@ -119,5 +119,5 @@
 .move .small {
     left: 30px;
     top: 25px;
-    background-color: #fff;
+    background-color: #007bff;
 }
