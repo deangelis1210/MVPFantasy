@@ -4,35 +4,37 @@
     align-items: center;
     justify-content: center;
     height: 100vh;
-    background-color: #f5f5f5;
+    background-color: #333;
+    color:#fff;
 }
 
-.dark-mode {
-    background-color: #333;
-    color: #fff;
+.light-mode {
+    background-color: #f5f5f5;
+    color: #333;
 }
   
 .log-in-form {
-    background-color: #fff;
+    background-color: #232323;
+    color:#fff;
     padding: 30px;
     border-radius: 20px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     text-align: center;
 }
 
-.dark-mode .log-in-form {
-    background-color: #232323;
-    color: #fff;
+.light-mode .log-in-form {
+    background-color: #fff;
+    color: #333;
 }
   
 .log-in-form h1 {
     margin-bottom: 20px;
     font-size: 24px;
-    color: #333;
+    color: #fff;
 }
 
-.dark-mode .log-in-form h1 {
-    color: #fff;
+.light-mode .log-in-form h1 {
+    color: #333;
 }
   
 .text-input {
@@ -47,8 +49,8 @@
 }
   
 .log-in-button, .sign-up-button {
-    background-color: #007bff;
-    color: #fff;
+    background-color: #fff;
+    color: #333;
     border: none;
     border-radius: 4px;
     padding: 10px 20px;
@@ -59,9 +61,9 @@
     margin-top: 18px;
 }
 
-.dark-mode .log-in-button, .sign-up-button {
-    background-color: #fff;
-    color: #333;
+.light-mode .log-in-button, .sign-up-button {
+    background-color: #007bff;
+    color: #fff;
 }
   
 .log-in-button:hover {
