@@ -2,16 +2,16 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import { DarkModeProvider } from './DarkModeContext';
+import { LightModeProvider } from './LightModeContext';
 import { AuthProvider } from './AuthContext';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
     <AuthProvider>
-      <DarkModeProvider>
+      <LightModeProvider>
         <App />
-      </DarkModeProvider>
+      </LightModeProvider>
     </AuthProvider>
   </React.StrictMode>,
   document.getElementById('root')

@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { database } from '../firebase.js'
 import { signOut } from 'firebase/auth';
 import './Team.css';
-import { useDarkMode } from '../DarkModeContext.js';
+import { useLightMode } from '../LightModeContext.js';
 import { collection, addDoc, getDocs, setDoc, doc, deleteDoc } from "firebase/firestore";
 import { db } from "../firebase";
 
@@ -39,15 +39,15 @@ function Team() {
         console.log("Updated players state:", players);
     }, [players]);
 
-    const { isDarkMode, toggleDarkMode } = useDarkMode();
-    const handleDarkModeToggle = () => {
-        toggleDarkMode();
+    const { isLightMode, toggleLightMode } = useLightMode();
+    const handleLightModeToggle = () => {
+        toggleLightMode();
     };
   
     return (
-    <div className={isDarkMode ? 'dark-mode home-big-container' : 'home-big-container'}>
+    <div className={isLightMode ? 'light-mode home-big-container' : 'home-big-container'}>
         <button onClick={handleClick} className='log-in-button'>Sign Out</button>
-        <button onClick={handleDarkModeToggle} className='log-in-button'>Toggle Dark Mode</button>
+        <button onClick={handleLightModeToggle} className='log-in-button'>Toggle Light Mode</button>
         <Link to = '/home'><button className='log-in-button'>Home Page</button></Link>
         <div className="home-container">
             <img src='/images/logo.jpg' alt='logo' className='home-logo'/>

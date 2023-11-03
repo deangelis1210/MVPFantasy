@@ -3,14 +3,14 @@ import { Link, useNavigate } from "react-router-dom"
 import { database } from '../firebase.js'
 import { createUserWithEmailAndPassword } from 'firebase/auth'
 import './SignUp.css'
-import { useDarkMode } from '../DarkModeContext.js';
+import { useLightMode } from '../LightModeContext.js';
 
 function SignUp() {
     const [errorMessage, setErrorMessage] = useState('');
   
     const history = useNavigate();
 
-    const { isDarkMode, toggleDarkMode } = useDarkMode();
+    const { isLightMode, toggleLightMode } = useLightMode();
   
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -29,7 +29,7 @@ function SignUp() {
     }
   
     return (
-      <div className={isDarkMode ? 'dark-mode log-in-container' : 'log-in-container'}>
+      <div className={isLightMode ? 'light-mode log-in-container' : 'log-in-container'}>
           <form className='log-in-form' onSubmit={(e) => handleSubmit(e)}>
                 <img src='/images/logo.jpg' alt="logo"/>
                 <h1>Sign Up</h1>

@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { database } from '../firebase.js'
 import { signOut } from 'firebase/auth';
 import './Home.css';
-import { useDarkMode } from '../DarkModeContext.js';
+import { useLightMode } from '../LightModeContext.js';
 
 function Home() {
 
@@ -17,9 +17,9 @@ function Home() {
     });
   }
 
-  const { isDarkMode, toggleDarkMode } = useDarkMode();
-  const handleDarkModeToggle = () => {
-    toggleDarkMode();
+  const { isLightMode, toggleLightMode } = useLightMode();
+  const handleLightModeToggle = () => {
+    toggleLightMode();
 
     // Button switching functionality from https://learnersbucket.com/tutorials/js-projects/day-night-toggle-switch-in-javascript/
     const switchBox = document.querySelector(".sun-moon");
@@ -34,11 +34,11 @@ function Home() {
   };
 
   return (
-    <div className={isDarkMode ? 'dark-mode home-big-container' : 'home-big-container'}>
+    <div className={isLightMode ? 'light-mode home-big-container' : 'home-big-container'}>
         <button onClick={handleClick} className='log-in-button'>Sign Out</button>
         <Link to = '/team'><button className='log-in-button'>Team Page</button></Link>
-        <div class="sun-moon" onClick={handleDarkModeToggle}>
-          <input type="checkbox" />
+        <div class="sun-moon" onClick={handleLightModeToggle}>
+          <input type="checkbox" defaultChecked />
           <span class="circle large"></span>
           <span class="circle small"></span>
         </div>
