@@ -39,7 +39,6 @@ function PlayerSearch() {
                 },
             });
             setSelectedPlayerStats(response.data.stats);
-            console.log(selectedPlayerStats.Rushing_Yds)
         } catch (error) {
             console.error('Error fetching player stats:', error);
         }
@@ -91,6 +90,7 @@ function PlayerSearch() {
     
     
     const togglePlayerSelection = async (playerName) => {
+        await fetchPlayerStats(playerName);
         if (selectedPlayers.includes(playerName)) {
             setSelectedPlayers(prevPlayers => prevPlayers.filter(p => p !== playerName));
             try {
@@ -100,6 +100,7 @@ function PlayerSearch() {
                 await deleteDoc(doc(db, email, playerName));
                 alert('Player Deleted ✔');
               } catch (error) {
+                alert('Player was NOT Deleted! Please try again!');
                 console.error('Error deleting player from Firestore:', error);
               }
         } else {
@@ -111,9 +112,23 @@ function PlayerSearch() {
                 const passDoc = doc(db, email, playerName);
                 await setDoc(passDoc, {
                     player: playerName, 
+                    team: selectedPlayerStats.Team,
+                    position: selectedPlayerStats.Position,
+                    gamesPlayed: selectedPlayerStats.Games_Played,
+                    passingYards: selectedPlayerStats.Passing_Yds,
+                    passingTouchdowns: selectedPlayerStats.Passing_TD,
+                    passingInterceptions: selectedPlayerStats.Passing_Int,
+                    rushingYards: selectedPlayerStats.Rushing_Yds,
+                    rushingTouchdowns: selectedPlayerStats.Rushing_TD,
+                    receivingReceptions: selectedPlayerStats.Receiving_Rec,
+                    vbd: selectedPlayerStats.VBD,
+                    positionRank: selectedPlayerStats.PosRank,
+                    fantasyPoints: selectedPlayerStats.FantPt,
+                    ppr: selectedPlayerStats.PPR,
                 });
                 alert('Player Added ✔');
             } catch (e) {
+                alert('Player was NOT Added! Please try again!');
                 console.error("Error adding document: ", e);
             }
         }
