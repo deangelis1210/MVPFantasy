@@ -20,6 +20,7 @@ function Team() {
     }
 
     const [players, setPlayers] = useState([]);
+    const [selectedPlayerStats, setSelectedPlayerStats] = useState(null);
 
     const fetchPlayers = async () => { 
         const auth = getAuth();
@@ -34,6 +35,10 @@ function Team() {
             setPlayers(items);            
         })
     }
+
+    const handlePlayerStats = (playerStats) => {
+        setSelectedPlayerStats(playerStats);
+    };
 
     useEffect(()=>{
         fetchPlayers();
@@ -56,14 +61,39 @@ function Team() {
         <div className="home-container">
             <img src='/images/logo.jpg' alt='logo' className='home-logo'/>
             <br/><br/>
-            <div className="player-content">
-                {
-                    players?.map((player,i)=>(
-                        <p key={i}>
-                            {player.player}
-                        </p>
-                    ))
-                }
+            <div className='playerSearchContainer'>
+                <div className="playerStatsContainer">
+                    <h3>Player Stats</h3>
+                    {selectedPlayerStats ? (
+                    <div>
+                        <p>Player Name: {selectedPlayerStats.player}</p>
+                        <p>Team: {selectedPlayerStats.team}</p>
+                        <p>Position: {selectedPlayerStats.position}</p>
+                        <p>Games Played: {selectedPlayerStats.gamesPlayed}</p>
+                        <p>Passing Yards: {selectedPlayerStats.passingYards}</p>
+                        <p>Passing Touchdowns: {selectedPlayerStats.passingTouchdowns}</p>
+                        <p>Passing Interceptions: {selectedPlayerStats.passingInterceptions}</p>
+                        <p>Rushing Yards: {selectedPlayerStats.rushingYards}</p>
+                        <p>Rushing Touchdowns: {selectedPlayerStats.rushingTouchdowns}</p>
+                        <p>Receiving Receptions: {selectedPlayerStats.receivingReceptions}</p>
+                        <p>Value Based Drafting (VBD): {selectedPlayerStats.vbd}</p>
+                        <p>Position Rank: {selectedPlayerStats.positionRank}</p>
+                        <p>Fantasy Points: {selectedPlayerStats.fantasyPoints}</p>
+                        <p>Points Per Reception (PPR): {selectedPlayerStats.ppr}</p>
+                    </div>
+                ) : (
+                        <p>Click on player name to view stats.</p>
+                    )}
+                </div>
+                <div className="player-content">
+                    {
+                        players?.map((player,i)=>(
+                            <button key={i} onClick={() => handlePlayerStats(player)}>
+                                {player.player}
+                            </button>
+                        ))
+                    }
+                </div>
             </div>
         </div>
     </div>
