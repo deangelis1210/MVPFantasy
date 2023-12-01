@@ -128,7 +128,6 @@ function PlayerSearch() {
                     <p>Player Name: {selectedPlayerStats.Player}</p>
                     <p>Team: {selectedPlayerStats.Team}</p>
                     <p>Position: {selectedPlayerStats.Position}</p>
-                    <p>Games Played: {selectedPlayerStats.Games_Played}</p>
                     <p>Passing Yards: {selectedPlayerStats.Passing_Yds}</p>
                     <p>Passing Touchdowns: {selectedPlayerStats.Passing_TD}</p>
                     <p>Passing Interceptions: {selectedPlayerStats.Passing_Int}</p>
@@ -139,6 +138,8 @@ function PlayerSearch() {
                     <p>Position Rank: {selectedPlayerStats.PosRank}</p>
                     <p>Fantasy Points: {selectedPlayerStats.FantPt}</p>
                     <p>Points Per Reception (PPR): {selectedPlayerStats.PPR}</p>
+                    <p>Projected Fantasy Score: {selectedPlayerStats.Projected_Score}</p>
+
                 </div>
             ) : (
                     <p>Click on player name to view stats.</p>
