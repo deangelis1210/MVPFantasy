@@ -11,6 +11,9 @@ function SignUp() {
     const history = useNavigate();
 
     const { isLightMode, toggleLightMode } = useLightMode();
+    const handleLightModeToggle = () => {
+        toggleLightMode();
+    };
   
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -30,19 +33,26 @@ function SignUp() {
   
     return (
       <div className={isLightMode ? 'light-mode log-in-container' : 'log-in-container'}>
-          <form className='log-in-form' onSubmit={(e) => handleSubmit(e)}>
-                <img src='/images/logo.jpg' alt="logo"/>
-                <h1>Sign Up</h1>
-                <input name="email" placeholder="Enter your email" 
-                className='text-input'></input>
-                <input name="password" type='password' placeholder="Enter your password" 
-                className='text-input'></input>
-                <button className='sign-up-button' type="submit">Sign Up</button>
-                <br/><br/>
-                {errorMessage && <div className="error-message">{errorMessage}</div>}
-                <div className='signup-prompt-container'>Already have an account? <Link to = '/'>Sign In</Link> </div>
-                <br/>
-          </form>
+        <img
+         src='/images/night-light.png'
+         alt='Dark Mode Toggle'
+         onClick={handleLightModeToggle} 
+         className='dark-mode-button'
+         />
+        <form className='log-in-form' onSubmit={(e) => handleSubmit(e)}>
+            <img src='/images/MVP_Fantasy-logos_transparent.png' alt="logo"/>
+            <h1>Sign Up</h1>
+            <input name="email" placeholder="Enter your email" 
+            className='text-input'></input>
+            <input name="password" type='password' placeholder="Enter your password" 
+            className='text-input'></input>
+            <br/>
+            <button className='sign-up-button' type="submit">Sign Up</button>
+            <br/><br/>
+            {errorMessage && <div className="error-message">{errorMessage}</div>}
+            <div className='signup-prompt-container'>Already have an account? <Link to = '/'>Sign In</Link> </div>
+            <br/>
+        </form>
       </div>
     )
 }

@@ -11,6 +11,9 @@ function Login() {
   const history = useNavigate();
 
   const { isLightMode, toggleLightMode } = useLightMode();
+  const handleLightModeToggle = () => {
+    toggleLightMode();
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -30,19 +33,26 @@ function Login() {
 
   return (
     <div className={isLightMode ? 'light-mode log-in-container' : 'log-in-container'}>
-        <form className='log-in-form' onSubmit={(e) => handleSubmit(e)}>
-            <img src='/images/logo.jpg' alt="logo"/>
-            <h1>Sign In</h1>
-            <input name="email" placeholder="Enter your email" 
-            className='text-input'></input>
-            <input name="password" type='password' placeholder="Enter your password" 
-            className='text-input'></input>
-            <button className='log-in-button' type="submit">Sign In</button>
-            <br/><br/>
-            {errorMessage && <div className="error-message">{errorMessage}</div>}
-            <div className='signup-prompt-container'>Don't have an account? <Link to = '/signup'>Sign Up</Link></div>
-            <br/>
-        </form>
+      <img
+        src='/images/night-light.png'
+        alt='Dark Mode Toggle'
+        onClick={handleLightModeToggle} 
+        className='dark-mode-button'
+        />
+      <form className='log-in-form' onSubmit={(e) => handleSubmit(e)}>
+        <img src='/images/MVP_Fantasy-logos_transparent.png' alt="logo"/>
+        <h1>Sign In</h1>
+        <input name="email" placeholder="Enter your email" 
+        className='text-input'></input>
+        <input name="password" type='password' placeholder="Enter your password" 
+        className='text-input'></input>
+        <br/>
+        <button className='log-in-button' type="submit">Sign In</button>
+        <br/><br/>
+        {errorMessage && <div className="error-message">{errorMessage}</div>}
+        <div className='signup-prompt-container'>Don't have an account? <Link to = '/signup'>Sign Up</Link></div>
+        <br/>
+      </form>
     </div>
   )
 }
