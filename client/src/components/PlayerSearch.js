@@ -39,6 +39,7 @@ function PlayerSearch() {
                 },
             });
             setSelectedPlayerStats(response.data.stats);
+            console.log("selectedPlayerStats: ", response.data.stats);
         } catch (error) {
             console.error('Error fetching player stats:', error);
         }
@@ -90,7 +91,6 @@ function PlayerSearch() {
     
     
     const togglePlayerSelection = async (playerName) => {
-        await fetchPlayerStats(playerName);
         if (selectedPlayers.includes(playerName)) {
             setSelectedPlayers(prevPlayers => prevPlayers.filter(p => p !== playerName));
             try {
@@ -109,22 +109,27 @@ function PlayerSearch() {
                 const auth = getAuth();
                 const user = auth.currentUser;
                 const email = user.email;
+                const response = await axios.get('/api/get_player_stats', {
+                    params: {
+                        name: playerName,
+                    },
+                });
                 const passDoc = doc(db, email, playerName);
                 await setDoc(passDoc, {
                     player: playerName, 
-                    team: selectedPlayerStats.Team,
-                    position: selectedPlayerStats.Position,
-                    gamesPlayed: selectedPlayerStats.Games_Played,
-                    passingYards: selectedPlayerStats.Passing_Yds,
-                    passingTouchdowns: selectedPlayerStats.Passing_TD,
-                    passingInterceptions: selectedPlayerStats.Passing_Int,
-                    rushingYards: selectedPlayerStats.Rushing_Yds,
-                    rushingTouchdowns: selectedPlayerStats.Rushing_TD,
-                    receivingReceptions: selectedPlayerStats.Receiving_Rec,
-                    vbd: selectedPlayerStats.VBD,
-                    positionRank: selectedPlayerStats.PosRank,
-                    fantasyPoints: selectedPlayerStats.FantPt,
-                    ppr: selectedPlayerStats.PPR,
+                    team: response.data.stats.Team,
+                    position: response.data.stats.Position,
+                    gamesPlayed: response.data.stats.Games_Played,
+                    passingYards: response.data.stats.Passing_Yds,
+                    passingTouchdowns: response.data.stats.Passing_TD,
+                    passingInterceptions: response.data.stats.Passing_Int,
+                    rushingYards: response.data.stats.Rushing_Yds,
+                    rushingTouchdowns: response.data.stats.Rushing_TD,
+                    receivingReceptions: response.data.stats.Receiving_Rec,
+                    vbd: response.data.stats.VBD,
+                    positionRank: response.data.stats.PosRank,
+                    fantasyPoints: response.data.stats.FantPt,
+                    ppr: response.data.stats.PPR,
                 });
                 alert('Player Added ✔');
             } catch (e) {
