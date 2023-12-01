@@ -56,10 +56,15 @@ function Team() {
     return (
     <div className={isLightMode ? 'light-mode home-big-container' : 'home-big-container'}>
         <button onClick={handleClick} className='log-in-button'>Sign Out</button>
-        <button onClick={handleLightModeToggle} className='log-in-button'>Toggle Light Mode</button>
+        <img
+         src='/images/night-light.png'
+         alt='Dark Mode Toggle'
+         onClick={handleLightModeToggle} 
+         className='dark-mode-button'
+         />
         <Link to = '/home'><button className='log-in-button'>Home Page</button></Link>
         <div className="home-container">
-            <img src='/images/logo.jpg' alt='logo' className='home-logo'/>
+            <img src='/images/MVP_Fantasy-logos_transparent.png' alt='logo' className='home-logo'/>
             <br/><br/>
             <div className='playerSearchContainer'>
                 <div className="playerStatsContainer">
