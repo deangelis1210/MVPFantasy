@@ -1,0 +1,15 @@
+.player-content button {
+    color: #007bff;
+    text-decoration: none;
+    cursor: pointer;
+    display: block;
+    margin-bottom: 5px;
+    background: none;
+    border: none;
+    outline: none;
+    font-size: 25px;
+}
+
+.player-content button:hover {
+    text-decoration: underline;
+}
