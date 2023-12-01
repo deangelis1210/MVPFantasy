@@ -119,7 +119,6 @@ function PlayerSearch() {
                     player: playerName, 
                     team: response.data.stats.Team,
                     position: response.data.stats.Position,
-                    gamesPlayed: response.data.stats.Games_Played,
                     passingYards: response.data.stats.Passing_Yds,
                     passingTouchdowns: response.data.stats.Passing_TD,
                     passingInterceptions: response.data.stats.Passing_Int,
@@ -130,6 +129,7 @@ function PlayerSearch() {
                     positionRank: response.data.stats.PosRank,
                     fantasyPoints: response.data.stats.FantPt,
                     ppr: response.data.stats.PPR,
+                    projected: response.data.stats.Projected_Score,
                 });
                 alert('Player Added ✔');
             } catch (e) {

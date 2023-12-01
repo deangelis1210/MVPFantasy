@@ -80,6 +80,7 @@ function Team() {
                         <p>Position Rank: {selectedPlayerStats.positionRank}</p>
                         <p>Fantasy Points: {selectedPlayerStats.fantasyPoints}</p>
                         <p>Points Per Reception (PPR): {selectedPlayerStats.ppr}</p>
+                        <p>Projected Fantasy Score: {selectedPlayerStats.projected}</p>
                     </div>
                 ) : (
                         <p>Click on player name to view stats.</p>
