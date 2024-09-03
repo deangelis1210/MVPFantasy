@@ -45,8 +45,8 @@ Whether you're a seasoned fantasy football veteran or a newcomer eager to elevat
 
 - **Charlie DeAngelis:**
   - Responsibilities:
-    - Dark mode
-    - General page styling
+    - Firebase integration
+    - General front-end architecture/styling
 
 
 ## Getting Started
